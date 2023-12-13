@@ -6,9 +6,31 @@ import Light from "./svg/light.svg";
 import Dark from "./svg/dark.svg";
 import Menu from "./svg/menu_icon.svg";
 import MobileNav from "./new.js";
-
+import { useRouter } from "next/router";
 
 const Navbar = () => {
+  const router = useRouter();
+  const pagePaths = {
+    dashboard: "/",
+    favorites: "/favorites",
+    posts: "/posts",
+    analytics: "/analytics",
+    lineup: "/lineup",
+  };
+
+  const isActive = (path) => router.pathname === path;
+  const getContainerStyle = (path) => {
+    return {
+      width: "12.625em",
+      height: "3em",
+      alignItems: "center",
+      margin: "0.8em 0",
+      borderRadius: "8px",
+      paddingLeft: "0.5em",
+      boxShadow: "0px 4px 8px rgba(0, 0, 0, 0.1)",
+      backgroundColor: isActive(path) ? "grey" : "transparent",
+    };
+  };
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -28,19 +50,19 @@ const Navbar = () => {
     // Implement logic for disconnecting Twitter
     console.log("Disconnect Twitter");
   };
-
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [isModal2Open, setIsModal2Open] = useState(false);
   // Function to toggle modal visibility
   const toggleModal = () => {
     setIsModalOpen(!isModalOpen);
   };
-
+  const toggleModal2 = () => {
+    setIsModal2Open(!isModal2Open);
+  };
   const handleAddWallet = () => {
     // Implement logic for adding wallet
     console.log("Add Wallet");
   };
-
   // Function to handle logout
   const handleLogout = () => {
     // Implement logic for logout
@@ -48,7 +70,6 @@ const Navbar = () => {
   };
   const ref = useRef();
   return (
-    <div>
     <div className={style.navbar_main}>
       <div className={style.navbar_a}>
         <div className="flex nav-content text-white">
@@ -57,32 +78,169 @@ const Navbar = () => {
             type="text"
             placeholder="Search an influencer or project"
           />
-          <div className={style.navbar_advance}>
+          <div
+            className={style.navbar_advance}
+            onClick={toggleModal2}
+            style={{
+              backgroundColor: isModal2Open ? "grey" : "transparent",
+              paddingTop: "2%",
+              paddingLeft: "2%",
+              borderTopLeftRadius: "1em",
+              borderTopRightRadius: "1em",
+              width: "38%",
+              bottom: "1%"
+            }}
+          >
             <Faders />
             <p>Advance filter</p>
           </div>
-           <div className="nav-side-buttons  absolute right-11 top-12 flex w-64 justify-end" style={{borderRadius: '8px'}}>
-            <div>
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 32 32"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M7.74906 11.917C7.74906 7.36044 11.4429 3.66663 15.9994 3.66663C20.556 3.66663 24.2498 7.36044 24.2498 11.917V18.0244L26.4 23.8096H5.59888L7.74906 18.0244V11.917Z"
-                  stroke="white"
-                  strokeWidth="1.5"
-                />
-                <path
-                  d="M20.223 23.8099V24.1112C20.223 26.4431 18.3327 28.3334 16.0008 28.3334C13.6689 28.3334 11.7786 26.4431 11.7786 24.1112V23.8099"
-                  stroke="white"
-                  strokeWidth="1.5"
-                />
-                <circle cx="22.6665" cy="6.66663" r="4" fill="#FFE812" />
-              </svg>
+          {isModal2Open && (
+            <div
+              style={{
+                position: "fixed",
+                top: "25.7%",
+                width: "18.5%",
+                left: "74.5%",
+                transform: "translate(-50%, -50%)",
+                backgroundColor: "#ffffff3c",
+                padding: "1%",
+                borderBottomRightRadius: "1em",
+                borderBottomLeftRadius: "1em",
+              }}
+            >
+              {/* First div in the modal */}
+              <div style={{ textAlign: "left", paddingBottom: "2%" }}>
+                <h2>Project filters</h2>
+                <button
+                  style={{
+                    backgroundColor: "black",
+                    paddingLeft: "4%",
+                    paddingRight: "4%",
+                    paddingTop: "1%",
+                    paddingBottom: "1%",
+                    borderRadius: "2em",
+                    marginLeft: "1%",
+                    marginRight: "1%",
+                    marginTop: "1%",
+                  }}
+                >
+                  Button 1
+                </button>
+                <button
+                  style={{
+                    backgroundColor: "black",
+                    paddingLeft: "4%",
+                    paddingRight: "4%",
+                    paddingTop: "1%",
+                    paddingBottom: "1%",
+                    borderRadius: "2em",
+                    marginLeft: "1%",
+                    marginRight: "1%",
+                    marginTop: "1%",
+                  }}
+                >
+                  Button 1
+                </button>
+              </div>
+
+              {/* Second div in the modal */}
+              <div style={{ textAlign: "left", paddingBottom: "2%" }}>
+                <h2>Influencer type filters</h2>
+                <button
+                  style={{
+                    backgroundColor: "black",
+                    paddingLeft: "4%",
+                    paddingRight: "4%",
+                    paddingTop: "1%",
+                    paddingBottom: "1%",
+                    borderRadius: "2em",
+                    marginLeft: "1%",
+                    marginRight: "1%",
+                    marginTop: "1%",
+                  }}
+                >
+                  Button 1
+                </button>
+                <button
+                  style={{
+                    backgroundColor: "black",
+                    paddingLeft: "4%",
+                    paddingRight: "4%",
+                    paddingTop: "1%",
+                    paddingBottom: "1%",
+                    borderRadius: "2em",
+                    marginLeft: "1%",
+                    marginRight: "1%",
+                    marginTop: "1%",
+                  }}
+                >
+                  Button 1
+                </button>
+              </div>
+
+              {/* Third div in the modal */}
+              <div style={{ textAlign: "left", paddingBottom: "2%" }}>
+                <h2>Influencer type filters</h2>
+                <button
+                  style={{
+                    backgroundColor: "black",
+                    paddingLeft: "4%",
+                    paddingRight: "4%",
+                    paddingTop: "1%",
+                    paddingBottom: "1%",
+                    borderRadius: "2em",
+                    marginLeft: "1%",
+                    marginRight: "1%",
+                    marginTop: "1%",
+                  }}
+                >
+                  Button 1
+                </button>
+                <button
+                  style={{
+                    backgroundColor: "black",
+                    paddingLeft: "4%",
+                    paddingRight: "4%",
+                    paddingTop: "1%",
+                    paddingBottom: "1%",
+                    borderRadius: "2em",
+                    marginLeft: "1%",
+                    marginRight: "1%",
+                    marginTop: "1%",
+                  }}
+                >
+                  Button 1
+                </button>
+              </div>
             </div>
+          )}
+
+          <div
+            className={`nav-side-buttons absolute right-8 top-10 flex justify-end ${
+              isModalOpen ? "bg-greydiv" : ""
+            }`}
+            style={{ borderRadius: "1em", width: "19%", height: "8%" }}
+          >
+            <svg
+              className="my-auto mx-4 "
+              width="32"
+              height="32"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M7.74906 11.917C7.74906 7.36044 11.4429 3.66663 15.9994 3.66663C20.556 3.66663 24.2498 7.36044 24.2498 11.917V18.0244L26.4 23.8096H5.59888L7.74906 18.0244V11.917Z"
+                stroke="white"
+                strokeWidth="1.5"
+              />
+              <path
+                d="M20.223 23.8099V24.1112C20.223 26.4431 18.3327 28.3334 16.0008 28.3334C13.6689 28.3334 11.7786 26.4431 11.7786 24.1112V23.8099"
+                stroke="white"
+                strokeWidth="1.5"
+              />
+              <circle cx="22.6665" cy="6.66663" r="4" fill="#FFE812" />
+            </svg>
 
             <div
               className="my-auto mx-4 "
@@ -97,21 +255,72 @@ const Navbar = () => {
             </div>
           </div>
 
-
           {/* Modal */}
           {isModalOpen && (
-            <div className="modal">
-              <div className="modal-content">
-                <div className="dropdown">
-                  <button className="dropbtn">Actions</button>
-                  <div className="dropdown-content">
-                    <button onClick={handleDisconnectTwitter}>
-                      Disconnect Twitter
-                    </button>
-                    <button onClick={handleAddWallet}>Add Wallet</button>
-                    <button onClick={handleLogout}>Logout</button>
-                  </div>
-                </div>
+            <div
+              style={{
+                position: "absolute",
+                right: "2%",
+                top: "16%",
+                backgroundColor: "#ffffff5c",
+                width: "19%",
+                height: "24%",
+                padding: "1%",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+                borderRadius: "1em",
+              }}
+            >
+              <div
+                className="content"
+                style={{ width: "100%", textAlign: "center" }}
+              >
+                <button
+                  onClick={handleDisconnectTwitter}
+                  style={{
+                    marginBottom: "8px",
+                    padding: "3%",
+                    paddingLeft: "5%",
+                    backgroundColor: "#3939396e",
+                    width: "80%",
+                    boxSizing: "border-box",
+                    borderRadius: "5em",
+                    textAlign: "left",
+                  }}
+                >
+                  Disconnect Twitter
+                </button>
+                <button
+                  onClick={handleAddWallet}
+                  style={{
+                    marginBottom: "8px",
+                    padding: "2%",
+                    paddingLeft: "5%",
+                    backgroundColor: "black",
+                    width: "80%",
+                    boxSizing: "border-box",
+                    borderRadius: "5em",
+                    textAlign: "left",
+                  }}
+                >
+                  Add Wallet
+                </button>
+                <button
+                  onClick={handleLogout}
+                  style={{
+                    fontWeight: "600",
+                    padding: "2%",
+                    paddingTop: "5%",
+                    width: "100%",
+                    boxSizing: "border-box",
+                    borderTop: "0.1em grey solid",
+                    textAlign: "left",
+                  }}
+                >
+                  Logout
+                </button>
               </div>
             </div>
           )}
@@ -122,7 +331,7 @@ const Navbar = () => {
       </div> */}
 
       <div ref={ref} className={style.sidebar}>
-        <div className="flex ">
+        <div className="flex items-center">
           <svg
             width="48"
             height="48"
@@ -233,13 +442,13 @@ const Navbar = () => {
               </linearGradient>
             </defs>
           </svg>
-          <div className="text-2xl font-bold">Origin</div>
+          <div className="text-3xl font-bold">Origin</div>
         </div>
         <div
-          className="side-navigation top-10  relative items-center justify-center"
+          className="side-navigation font-instrument-sans top-10  relative items-center justify-center"
           style={{ width: "292px" }}
         >
-          <div className="flex " style={{ width: "298px", height: "48px" }}>
+          <div className="flex" style={getContainerStyle(pagePaths.dashboard)}>
             <svg
               width="24"
               height="24"
@@ -266,9 +475,22 @@ const Navbar = () => {
                 strokeLinecap="square"
               />
             </svg>
-            <Link href={"/"}>Dashboard</Link>
+            <Link
+              href={"/"}
+              className="flex"
+              style={{
+                width: "12.625em",
+                height: "3em",
+                alignItems: "center",
+                margin: "0.8em 0",
+                borderRadius: "8px",
+                paddingLeft: "0.5em",
+              }}
+            >
+              Dashboard
+            </Link>
           </div>
-          <div className="flex " style={{ width: "298px", height: "48px" }}>
+          <div className="flex" style={getContainerStyle(pagePaths.favorites)}>
             <svg
               width="24"
               height="24"
@@ -303,9 +525,22 @@ const Navbar = () => {
                 strokeLinecap="square"
               />
             </svg>
-            <Link href={"/favorites"}>Favorites</Link>
+            <Link
+              href={"/favorites"}
+              className="flex"
+              style={{
+                width: "12.625em",
+                height: "3em",
+                alignItems: "center",
+                margin: "0.8em 0",
+                borderRadius: "8px",
+                paddingLeft: "0.5em",
+              }}
+            >
+              Favorites
+            </Link>
           </div>
-          <div className="flex " style={{ width: "298px", height: "48px" }}>
+          <div className="flex" style={getContainerStyle(pagePaths.posts)}>
             <svg
               width="24"
               height="24"
@@ -340,9 +575,22 @@ const Navbar = () => {
                 strokeLinecap="square"
               />
             </svg>
-            <Link href={"/posts"}>Posts</Link>
+            <Link
+              href={"/posts"}
+              className="flex"
+              style={{
+                width: "12.625em",
+                height: "3em",
+                alignItems: "center",
+                margin: "0.8em 0",
+                borderRadius: "8px",
+                paddingLeft: "0.5em",
+              }}
+            >
+              Posts
+            </Link>
           </div>
-          <div className="flex " style={{ width: "298px", height: "48px" }}>
+          <div className="flex" style={getContainerStyle(pagePaths.analytics)}>
             <svg
               width="24"
               height="24"
@@ -363,9 +611,22 @@ const Navbar = () => {
                 strokeLinecap="square"
               />
             </svg>
-            <Link href={"/analytics"}>Analytics</Link>
+            <Link
+              href={"/analytics"}
+              className="flex"
+              style={{
+                width: "12.625em",
+                height: "3em",
+                alignItems: "center",
+                margin: "0.8em 0",
+                borderRadius: "8px",
+                paddingLeft: "0.5em",
+              }}
+            >
+              Analytics
+            </Link>
           </div>
-          <div className="flex " style={{ width: "298px", height: "48px" }}>
+          <div className="flex" style={getContainerStyle(pagePaths.lineup)}>
             <svg
               width="24"
               height="24"
@@ -436,7 +697,20 @@ const Navbar = () => {
                 strokeLinecap="square"
               />
             </svg>
-            <Link href={"/lineup"}>Line-up Maker</Link>
+            <Link
+              href={"/lineup"}
+              className="flex"
+              style={{
+                width: "12.625em",
+                height: "3em",
+                alignItems: "center",
+                margin: "0.8em 0",
+                borderRadius: "8px",
+                paddingLeft: "0.5em",
+              }}
+            >
+              Line-up Maker
+            </Link>
           </div>
         </div>
         <div className={style.button_main}>
@@ -446,22 +720,28 @@ const Navbar = () => {
               Light
             </button>
           </div>
-          <div style={{ background: "black", marginLeft: "4px" }}>
-            <button className={style.dark_button}>
-              <Dark />
-              Dark
-            </button>
+          <div className={style.button_main}>
+            <div>
+              <button className="flex">
+                <Light />
+                Light
+              </button>
+            </div>
+            <div style={{ background: "black", marginLeft: "4px" }}>
+              <button className={style.dark_button}>
+                <Dark />
+                Dark
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <div className={style.mobile_nav}>
-      <div>
-        <MobileNav/>
+      <div className={style.mobile_nav}>
+        <div>
+          <MobileNav />
+        </div>
       </div>
     </div>
-    </div>
-
   );
 };
 
