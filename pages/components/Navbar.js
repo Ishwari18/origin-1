@@ -71,6 +71,7 @@ const Navbar = () => {
   const ref = useRef();
   return (
     <>
+    <div>
     <div className={style.navbar_main}>
       <div className={style.navbar_a}>
         <div className="flex nav-content text-white">
@@ -734,6 +735,7 @@ const Navbar = () => {
       <MobileNav />
     </div>
   </div>
+    </div>
     </>
   );
 };
