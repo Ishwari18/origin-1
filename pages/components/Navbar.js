@@ -324,6 +324,8 @@ const Navbar = () => {
               </div>
             </div>
           )}
+
+          <button className="menu"></button>
         </div>
       </div>
       {/* <div className="sidebar">
