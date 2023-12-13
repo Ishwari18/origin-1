@@ -1,5 +1,5 @@
 import React from "react";
-import backgroundImage from '../public/images/bgimg1.png'; 
+import backgroundImage from '../public/images/bg232.png'; 
 import style from '../styles/dashboard.module.css';
 
 const Dashboard = () => {
@@ -9,7 +9,12 @@ const Dashboard = () => {
     >
       <div className={style.dashboard_title} >Dashboard</div>
       <div className={style.dashboard_firstbar}>
-      <div className= {style.dashboard_firstbar_container} >
+      <div className= {style.dashboard_firstbar_container} style={{
+  backgroundImage: 'url(/images/bg232.png)',
+  backgroundSize: 'cover', // or 'contain', or specific dimensions like '50% 50%'
+  backgroundPosition: 'center', // or 'top', 'left', 'bottom', 'right', etc.
+  // Add more styles as needed
+}}>
           <div className={style.text}>
             <span className={style.text_a}>9.6k</span>
             <span>Total Influencer</span>

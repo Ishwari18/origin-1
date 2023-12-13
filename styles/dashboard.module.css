@@ -28,7 +28,6 @@
     border-radius: 0.875em; /* 14px / 16px */
     padding-left: 0.625em; /* 10px / 16px */
     padding-top: 6.25em; /* 100px / 16px */
-    background-image: url('/images/bgimg1.png');
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   }
   
